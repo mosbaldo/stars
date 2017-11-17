@@ -1,0 +1,24 @@
+<form class="user-detail-form" [formGroup]="frm" >    
+  <mat-form-field>
+    <input matInput placeholder="Clave de usuario"
+    formControlName="username" [(ngModel)]="username">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Nombre de usuario"
+    formControlName="name" [(ngModel)]="name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Contraseña" type="password" 
+    formControlName="password" [(ngModel)]="password">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Confirmar contraseña" type="password"
+    formControlName="passwordConfirm">
+  </mat-form-field>
+</form>
+
+<p>Form value: {{ frm.value | json }}</p>
+<p>Form status: {{ frm.status | json }}</p>

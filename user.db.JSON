@@ -1,0 +1,51 @@
+[{
+    "_id": "1",
+    "username": "string",
+    "name": "Francisco Domínguez",
+    "stars": "15"
+}, {
+    "_id": "2",
+    "username": "string",
+    "name": "Pedro Márquez",
+    "stars": "30"
+}, {
+    "_id": "3",
+    "username": "string",
+    "name": "Robeto Mórales",
+    "stars": "18"
+}, {
+    "_id": "4",
+    "username": "string",
+    "name": "Rosío Hernández",
+    "stars": "27"
+}, {
+   "_id": "5",
+    "username": "string",
+    "name": "Cristian Solis",
+    "stars": "20"
+}, {
+    "_id": "6",
+    "username": "string",
+    "name": "Roberto Pérez",
+    "stars": "number"
+}, {
+    "_id": "7",
+    "username": "string",
+    "name": "María Céspedez",
+    "stars": "14"
+}, {
+    "_id": "8",
+    "username": "string",
+    "name": "Olga Martínez",
+    "stars": "38"
+}, {
+    "_id": "9",
+    "username": "string",
+    "name": "Alejandro Castillo",
+    "stars": "8"
+}, {
+    "_id": "10",
+    "username": "string",
+    "name": "Fernanda Guatemala",
+    "stars": "15"
+}]

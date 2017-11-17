@@ -1,0 +1,15 @@
+.mat-list-icon {
+    color: gold;
+    vertical-align: middle;
+    padding-bottom: 5px;
+}
+
+.user-list-card {
+    text-decoration: none;
+}
+
+.user-list-card > mat-card {
+    color: white;
+    margin-bottom: 25px; 
+    background-color: black;
+}
