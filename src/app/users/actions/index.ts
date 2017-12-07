@@ -12,6 +12,8 @@ import { State } from '../../reducers/index';
 
 export const LOAD_USERS = '[Users] Load';
 export const LOAD_USERS_SUCCESS = '[Users] Load Complete';
+export const TOGGLE_USER_LIST_ORDER = '[Users] Toggle List Order';
+export const FILTER_USER_LIST = '[Users] Filter List';
 
 /*
   ACTION CLASSES
@@ -26,6 +28,15 @@ export class LoadUsersSuccess implements Action {
   constructor(public payload: User) {}
 }
 
+export class ToggleUserListOrder implements Action {
+  readonly type = TOGGLE_USER_LIST_ORDER;
+}
+
+export class FilterUserList implements Action {
+  readonly type = FILTER_USER_LIST;
+  constructor(public payload: string) {}
+}
+
 /*
   ACTION CREATORS
 */
@@ -36,11 +47,19 @@ export class IndexActions {
   constructor(private store: Store<State>, private http: HttpClient, private router: Router ) {}
 
   async fetchAllUsers() {
-    this.store.dispatch(new LoadUsers());
+    const query = {
+      selector: {
+        _id: { '$gt': 0},
+        modelType: 'user'
+      }
+    };
+
+    const body: any = await this.http.post('http://portales.infotec.com.mx:8080/stars/_find', query).toPromise();
+    this.store.dispatch(new LoadUsersSuccess(body.docs));
+    /* this.store.dispatch(new LoadUsers());
     try {
       const users$: any = await this.http
         .get('http://localhost:9080/user.db.JSON').toPromise();
-     /*  
      const users$: any = [
         {
         "_id": "1",
@@ -93,14 +112,21 @@ export class IndexActions {
             "name": "Fernanda Guatemala",
             "stars": "15"
         }
-      ]; 
-      */
+      ];
 
       this.store.dispatch(new LoadUsersSuccess(users$));
  
     } catch (error) {
       
-    }
+    } */
+  }
+
+  toggleSortOrder() {
+    this.store.dispatch(new ToggleUserListOrder());
+  }
+
+  applyUserListFilters(searchstring) {
+    this.store.dispatch(new FilterUserList(searchstring));
   }
 
 }

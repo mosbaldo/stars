@@ -1,5 +1,13 @@
 <a class="user-list-card" [routerLink]="['/users/', user._id]">
   <mat-card class="">
-    <h4 mat-line>{{ user.name | initialsUser }} - {{ user.name }} - {{ user.stars }}<mat-icon class="mat-list-icon">star</mat-icon></h4>
+    <div class="initials-avatar">
+        {{ user.name | initialsUser}}
+    </div>
+    <div class="top-username">
+      {{ user.name }}
+    </div>
+    <div class="star-counter">
+        {{ user.stars }} <i class="material-icons star-icon">star</i>
+    </div>
   </mat-card>
 </a>

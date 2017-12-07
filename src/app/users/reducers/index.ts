@@ -6,19 +6,16 @@ import * as fromRoot from '../../reducers';
   STATE INTERFACE
 */
 
-/*
-  users: {
-    list: {
-      users: [{ username: "pedro" }, {"username", "jorge"}]
-    },
-    detail: {
-      selectedUser: { username: "pedro" }
-    }
-  },
-*/
+export interface UsersListFilters {
+  searchtext: string;
+  sortBy: string;
+  sortAsc: boolean;
+}
 
 export interface UsersList {
   users: Array<User>;
+  allUsers: Array<User>;
+  filters: UsersListFilters;  
 }
 
 export interface UserDetail {
@@ -35,12 +32,41 @@ export interface State extends fromRoot.State {
 }
 
 /*
+  UTIL FUNCTIONS
+*/
+
+function sortUsers (users: User[], sortAsc: boolean, sortFilterType: string = 'stars' ): User[] {
+  
+  if (sortFilterType === 'stars') {
+
+    if (sortAsc) {
+      users.sort((a, b) => (a.stars > b.stars) ? -1 : 1);
+    } else {
+      users.sort((a, b) => (a.stars > b.stars) ? 1 : -1);
+    }
+
+  }
+  return users;
+}
+
+function filterUsersByName (users: User[], name: string ): User[] {
+  const _name = name.toLocaleLowerCase();
+  return users.filter(u => u.name.toLocaleLowerCase().includes(_name));
+}
+
+/*
   STATE REDUCERS
 */
 
 const DEFAULT_STATE = {
   LIST: {
-    users: []
+    allUsers: [],
+    users: [],
+    filters: {
+      searchtext: '',
+      sortBy: 'stars',
+      sortAsc: false
+    }
   },
   DETAIL: {
     selectedUser: new User()
@@ -51,7 +77,21 @@ export function listReducer(state = DEFAULT_STATE.LIST, { type, payload }): User
   switch (type) {
 
     case user.LOAD_USERS_SUCCESS:
-    return { ...state, users: payload };
+      const users = sortUsers(payload, state.filters.sortAsc);
+      return { ...state, allUsers: users, users: users };
+    case user.TOGGLE_USER_LIST_ORDER:
+      const sortAsc = !state.filters.sortAsc;
+      return {
+        ...state,
+        users: sortUsers(state.users, sortAsc),
+        filters: { ...state.filters, sortAsc: sortAsc }
+      };
+    case user.FILTER_USER_LIST:
+      return {
+        ...state,
+        users: filterUsersByName(state.allUsers, payload),
+        filters: { ...state.filters, searchtext: payload }
+      };
     default:
       return state;
   }
@@ -75,4 +115,6 @@ export const reducers = {
 */
 
 export const getAllUsers = (appState) => appState.users.list.users;
+export const getFilteredUsers = (appState) => appState.users.list.users;
 export const getSelectedUser = (appState) => appState.users.detail.selectedUser;
+export const getListFilters = (appState) => appState.users.list.filters;

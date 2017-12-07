@@ -1,12 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
-.module-content {
+body {
     display: flex;
-    justify-content: center;
     flex-direction: row;
+    justify-content: center;
 }
 
-.module-content > * {
-    align-self: flex-start;
+.content-wrapper {
+    flex-grow: 2;
+    order: 2;
+    padding: 0px 15px
+}
+
+.side-bar {
+    flex: 0 0 250px;
+    order: 1;
+}
+
+@media only screen and (max-width: 800px) {
+    .side-bar {
+        flex: 0 0 70px;
+        order: 1;
+    }
 }

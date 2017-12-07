@@ -14,6 +14,8 @@ import * as fromUsers from '../../reducers';
 export class UserListComponent implements OnInit {
 
   users$: Observable<Array<User>>;
+  listFilters$: Observable<fromUsers.UsersListFilters>;
+  
   // users$: Observable<Array<User>>;
   constructor(
     private store: Store<State>,
@@ -25,7 +27,12 @@ export class UserListComponent implements OnInit {
     //   this.users$.push(new User(i, `Usuario ${i}`, `${Math.floor(Math.random() * 100 + 1)}`));
     // }
     this.users$ = this.store.select(fromUsers.getAllUsers);   
+    // this.listFilters$ = this.store.select(fromUsers.getListFilters);
     this.actions.fetchAllUsers();
+  }
+
+  searchUsers(text) {
+    this.actions.applyUserListFilters(text);
   }
 
 }

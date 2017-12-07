@@ -1,0 +1,25 @@
+.filters-container {
+    display: flex;  
+    flex-flow: row wrap;
+    font-weight: bold;
+}
+
+.filters-container > * {
+    padding: 10px;
+    flex: 1 100%;
+}
+
+.filters-container-name > mat-form-field {
+    width: 100%;
+}
+
+.filters-container-oder > button {
+    justify-content: flex-end
+}
+
+.filters-container > * { flex: 1 auto; }
+
+@media all and (min-width: 800px) {
+    .filters-container-name { order: 1 }
+    .filters-container-oder { order: 2 }
+}

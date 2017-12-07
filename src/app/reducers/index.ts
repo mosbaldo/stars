@@ -2,6 +2,4 @@ export interface State {
   version: string;
 }
 
-export const rootReducer = {
-  
-};
+export const rootReducer = {};

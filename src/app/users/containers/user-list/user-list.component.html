@@ -1,10 +1,20 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div></div>
-<div style="text-align:center">
+<div>
   <h1>
     {{title}}
   </h1>
 
+  <div class="filters-container">
+    <div class="filters-container-name">
+      <mat-form-field >
+        <input matInput placeholder="Buscar..." (keyup)="searchUsers($event.target.value)">
+      </mat-form-field>      
+    </div>
+    <div class="filters-container-oder">
+      <button mat-raised-button type="button" (click)="this.actions.toggleSortOrder()" matTooltip="Ordernar">Ordenar</button>
+    </div>
+  </div>
   <app-user-card *ngFor="let user of users$ | async" [user]="user"> </app-user-card>
 
 </div>
